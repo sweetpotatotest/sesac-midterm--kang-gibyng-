@@ -13,29 +13,52 @@
 </head>
 
 <body>
-  <form>
-    <div class="form-floating mb-3">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email address</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
-    </div>
-    <button type="button" class="btn btn-primary" onclick="login()">Primary</button>
-  </form>
-   <p id="result"></p>
+  <div class="container">
+    <form>
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Email address</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+      </div>
+      <button type="button" class="btn btn-primary" onclick="login()">Primary</button>
+      <button type="button" class="btn btn-primary" onclick="remove()">remove</button>
+      <button type="button" class="btn btn-primary" onclick="move()">move</button>
+    </form>
+    <p id="result"></p>
+  </div>
 </body>
 
 <script>
   //로컬 스토리지에 저장
-  const login = () => {
+  function login() {
     const a = document.getElementById("floatingInput").value;
     const b = document.getElementById("floatingPassword").value;
     localStorage.setItem("id", a);
     localStorage.setItem("password", b);
+
+    //true가 스트링
+    localStorage.setItem("accesskey", true);
     document.getElementById('result').textContent = "저장 완료!";
+
+    //클라이언트 측에서 기록함
+    const localStorageId = localStorage.getItem("id");
+    const localStoragePassword = localStorage.getItem("password");
+    console.log(localStorageId, localStoragePassword);
   }
+
+  function remove() {
+    window.localStorage.removeItem("id");
+    window.localStorage.removeItem("password");
+  }
+
+  function move() {
+    window.location.href = "./sign-up.html";
+    //window.open() -> 새창으로 이동
+  }
+
 </script>
 
 </html>
